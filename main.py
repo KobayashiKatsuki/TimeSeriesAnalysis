@@ -146,11 +146,17 @@ if __name__ == '__main__':
     
     # 未来の予測
     pred = srimax.forecast(100) 
-    print(pred[:])
+    #print(pred[:])
+    
+    pred_non_neg = pred.where(pred>0, 0) # 負数を0に置き換えた
+    #print(pred_non_neg)
+    
     plt.figure(figsize=(10, 5))
     plt.plot(pcr_ts, label='Actual')
-    plt.plot(pred, label='Prediction', linestyle='--')
+    #plt.plot(pred, label='Prediction', linestyle='--')
+    plt.plot(pred_non_neg, label='Prediction', linestyle='--')
     plt.legend(loc='best')
+    
     
     """
     左の数値は7/1から数えての日数　ピークの日付をプロット
